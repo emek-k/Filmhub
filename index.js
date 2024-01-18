@@ -35,7 +35,6 @@ function queryPromise(sql,values=[]){
 app.post('/uzytkownicy', async(req,res)=>{
     try{
         const{username, haslo, email}=req.body;
-        var validRegex = "/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/";
         if(!username || !haslo || !email){
             throw new Error("Wszystkie pola muszą być wypełnione.");
         }
@@ -164,8 +163,8 @@ app.get('/kolejka/:id', async(req,res)=>{
 })
 //Search
 app.get('/uzytkownicy/szukaj', async(req,res)=>{
-    try{
-        const query=req.query.q;
+    try {
+        const {query} =req.body;
         const SQL='SELECT * FROM użytkownicy WHERE username LIKE ?';
         const result=await queryPromise(SQL,[query]);
 
