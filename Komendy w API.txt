@@ -1,0 +1,12 @@
+GET /uzytkownicy-Daje listę wszystkich użytkowników w bazie danych.
+GET /uzytkownicy/{id}-Daje użytkownika o podanym id.
+POST /uzytkownicy-Dodaje nowego użytkownika do bazy danych. Należy podać username, email i hasło w ciele zapytania.
+GET /uzytkownicy/szukaj Znajduje użytkownika o podanym w ciele username.
+PUT /uzytkownicy/{id}-Edytuje użytkownika o podanym id. Username, email i hasło podawane w ciele zapytania.
+DELETE /uzytkownicy/{id}-Usuwa użytkownika o podanym id.
+
+Wszystkie trzy listy mają te same komendy, trzeba tylko zamienić 'ulubione' na 'obejrzane' lub 'kolejka'
+
+POST /ulubione-Dodaje id filmu do listy. W ciele zapytania trzeba podać id użytkownika i filmu.
+GET /ulubione/{id}-Pokazuje listę id wszystkich filmów ulubionych przez użytkownika o podanym id.
+DELETE /ulubione/{id}-Usuwa id filmu z listy użytkownika o tym id. Trzeba podać id filmu w ciele zapytania.
