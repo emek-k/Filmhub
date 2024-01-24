@@ -5,18 +5,19 @@ const bodyParser=require("body-parser");
 const app=express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}))
-app.listen(3000,()=>{
+app.listen(3001,()=>{
     console.log("Start");
 });
 const db=mysql.createConnection({
     host:'127.0.0.1',
     port:'3306',
     user:'root',
-    database:'użytkownicy'
+    database:'uzytkownicy'
 })
 db.connect((err)=>{
     if(err){
-        console.log("Error");
+        console.error('Error connecting to the database:', err);
+        return;
     }
     console.log("Połączono");
 })
@@ -42,7 +43,7 @@ app.post('/uzytkownicy', async(req,res)=>{
          //   throw new Error("Proszę podaj prawidłowy email.");
        // }
         const użytkownik=[username,haslo,email];
-        const SQL="INSERT INTO użytkownicy (Username,Hasło,Email) VALUES (?,?,?)";
+        const SQL="INSERT INTO uzytkownicy (Username,Hasło,Email) VALUES (?,?,?)";
         const result=await queryPromise(SQL,użytkownik)
         res.json({id:result.insertID,username,haslo,email});
     }catch(err){
@@ -93,14 +94,14 @@ app.post('/kolejka', async(req,res)=>{
 })
 //READ.
 app.get('/uzytkownicy',async(req,res)=>{
-    var SQL='SELECT * FROM użytkownicy';
+    var SQL='SELECT * FROM uzytkownicy';
     const results=await queryPromise(SQL);
     res.status(500).json(results);
 })
 app.get('/uzytkownicy/:id', async(req,res)=>{
     try{
         const{id}=req.params;
-        var SQL = 'SELECT * FROM użytkownicy WHERE Id=?';
+        var SQL = 'SELECT * FROM uzytkownicy WHERE Id=?';
         const results=await queryPromise(SQL,[id]);
         if(results.length===0){
             res.status(404).json({error: 'Nie ma takiego użytkownika'});
@@ -165,7 +166,7 @@ app.get('/kolejka/:id', async(req,res)=>{
 app.get('/uzytkownicy/szukaj', async(req,res)=>{
     try {
         const {query} =req.body;
-        const SQL='SELECT * FROM użytkownicy WHERE username LIKE ?';
+        const SQL='SELECT * FROM uzytkownicy WHERE username LIKE ?';
         const result=await queryPromise(SQL,[query]);
 
         if(result.length===0){
@@ -181,7 +182,7 @@ app.put('/uzytkownicy/:id',async(req,res)=>{
     try{
         const id=req.params.id;
         const{username, haslo, email}=req.body;
-        const SQL="UPDATE użytkownicy SET Username = ? , Hasło = ?, Email=? WHERE Id=?";
+        const SQL="UPDATE uzytkownicy SET Username = ? , Hasło = ?, Email=? WHERE Id=?";
         const result=await queryPromise(SQL,[username,haslo,email,id])
         if(result.affectedRows===0){
             res.send(404).json({error:"Nie ma takiego użytkownika"})
@@ -197,7 +198,7 @@ app.put('/uzytkownicy/:id',async(req,res)=>{
 app.delete('/uzytkownicy/:id',async(req,res)=>{
     try{
         const id=req.params.id;
-        const SQL='DELETE FROM użytkownicy WHERE Id=?';
+        const SQL='DELETE FROM uzytkownicy WHERE Id=?';
         const result=await queryPromise(SQL,[id]);
         if(result.affectedRows===0){
             res.status(404).json({error:"Nie ma takiego użytkownika"});

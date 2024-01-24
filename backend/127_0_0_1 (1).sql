@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `użytkownicy`
+-- Database: `uzytkownicy`
 --
-CREATE DATABASE IF NOT EXISTS `użytkownicy` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
-USE `użytkownicy`;
+CREATE DATABASE IF NOT EXISTS `uzytkownicy` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+USE `uzytkownicy`;
 
 -- --------------------------------------------------------
 
@@ -31,9 +31,9 @@ USE `użytkownicy`;
 
 DROP TABLE IF EXISTS `kolejka`;
 CREATE TABLE IF NOT EXISTS `kolejka` (
-  `IDUżytkownik` int NOT NULL,
+  `IDUzytkownik` int NOT NULL,
   `IDFilm` int NOT NULL,
-  PRIMARY KEY (`IDUżytkownik`,`IDFilm`)
+  PRIMARY KEY (`IDUzytkownik`,`IDFilm`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -44,9 +44,9 @@ CREATE TABLE IF NOT EXISTS `kolejka` (
 
 DROP TABLE IF EXISTS `obejrzane`;
 CREATE TABLE IF NOT EXISTS `obejrzane` (
-  `IDUżytkownik` int NOT NULL,
+  `IDUzytkownik` int NOT NULL,
   `IDFilm` int NOT NULL,
-  PRIMARY KEY (`IDUżytkownik`,`IDFilm`)
+  PRIMARY KEY (`IDUzytkownik`,`IDFilm`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -57,39 +57,39 @@ CREATE TABLE IF NOT EXISTS `obejrzane` (
 
 DROP TABLE IF EXISTS `ulubione`;
 CREATE TABLE IF NOT EXISTS `ulubione` (
-  `IDUżytkownik` int NOT NULL,
+  `IDUzytkownik` int NOT NULL,
   `IDFilm` int NOT NULL,
-  PRIMARY KEY (`IDUżytkownik`,`IDFilm`)
+  PRIMARY KEY (`IDUzytkownik`,`IDFilm`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `ulubione`
 --
 
-INSERT INTO `ulubione` (`IDUżytkownik`, `IDFilm`) VALUES
+INSERT INTO `ulubione` (`IDUzytkownik`, `IDFilm`) VALUES
 (1, 1),
 (1, 3);
 
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `użytkownicy`
+-- Struktura tabeli dla tabeli `uzytkownicy`
 --
 
-DROP TABLE IF EXISTS `użytkownicy`;
-CREATE TABLE IF NOT EXISTS `użytkownicy` (
+DROP TABLE IF EXISTS `uzytkownicy`;
+CREATE TABLE IF NOT EXISTS `uzytkownicy` (
   `Id` int NOT NULL AUTO_INCREMENT,
   `Username` varchar(100) NOT NULL,
-  `Hasło` varchar(100) NOT NULL,
+  `Haslo` varchar(100) NOT NULL,
   `Email` varchar(100) NOT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `użytkownicy`
+-- Dumping data for table `uzytkownicy`
 --
 
-INSERT INTO `użytkownicy` (`Id`, `Username`, `Hasło`, `Email`) VALUES
+INSERT INTO `uzytkownicy` (`Id`, `Username`, `Haslo`, `Email`) VALUES
 (1, 'A', 'a', 'Izual400@gmail.com'),
 (3, 'C', 'c', 'Izual400@gmail.com');
 COMMIT;
