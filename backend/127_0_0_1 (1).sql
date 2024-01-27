@@ -68,7 +68,12 @@ CREATE TABLE IF NOT EXISTS `ulubione` (
 
 INSERT INTO `ulubione` (`IDUzytkownik`, `IDFilm`) VALUES
 (1, 1),
-(1, 3);
+(1, 3),
+(1, 872585),
+(2, 753342),
+(3, 753342),
+(3, 848187),
+(3, 872585);
 
 -- --------------------------------------------------------
 
@@ -91,6 +96,7 @@ CREATE TABLE IF NOT EXISTS `uzytkownicy` (
 
 INSERT INTO `uzytkownicy` (`Id`, `Username`, `Haslo`, `Email`) VALUES
 (1, 'A', 'a', 'Izual400@gmail.com'),
+(2, 'B', 'b', 'example@example.com'),
 (3, 'C', 'c', 'Izual400@gmail.com');
 COMMIT;
 
