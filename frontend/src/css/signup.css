@@ -4,7 +4,9 @@
   align-items: center;
   height: 90vh;
 }
-
+.header{
+  color: whitesmoke;
+}
 .form-signup {
   width: 80vh;
 }

@@ -35,5 +35,5 @@
     position: fixed;
     top: 20px;
     right: 20px;
-    z-index: 1050; /* To make sure it appears above other elements */
+    z-index: 1050;
 }

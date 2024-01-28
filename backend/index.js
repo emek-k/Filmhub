@@ -40,23 +40,32 @@ function queryPromise(sql,values=[]){
     });
 }
 //CREATE
-app.post('/uzytkownicy', async(req,res)=>{
-    try{
-        const{username, haslo, email}=req.body;
-        if(!username || !haslo || !email){
-            throw new Error("Wszystkie pola muszą być wypełnione.");
-        }
-        //if(!email.value.match(validRegex)){
-         //   throw new Error("Proszę podaj prawidłowy email.");
-       // }
-        const użytkownik=[username,haslo,email];
-        const SQL="INSERT INTO uzytkownicy (Username,Hasło,Email) VALUES (?,?,?)";
-        const result=await queryPromise(SQL,użytkownik)
-        res.json({id:result.insertID,username,haslo,email});
-    }catch(err){
-        console.log(err);
+app.post('/uzytkownicy', async (req, res) => {
+  try {
+    const { username, haslo, email } = req.body;
+    if (!username || !haslo || !email) {
+      return res.status(400).json({ error: "Wszystkie pola muszą być wypełnione" });
     }
-})
+
+    const checkSQL = "SELECT * FROM uzytkownicy WHERE Username = ? OR Email = ?";
+    const existingUser = await queryPromise(checkSQL, [username, email]);
+
+    if (existingUser.length > 0) {
+      return res.status(409).json({ error: "Użytkownik o danym email lub username już istnieje" });
+    }
+
+    // Insert new user
+    const insertSQL = "INSERT INTO uzytkownicy (Username, Haslo, Email) VALUES (?, ?, ?)";
+    const result = await queryPromise(insertSQL, [username, haslo, email]);
+
+    res.json({ id: result.insertId, username, email });
+  } catch (err) {
+    console.error("Database Query Error:", err);
+    res.status(500).json({ error: 'Internal Server Error', details: err.message });
+  }
+});
+
+
 app.post('/ulubione', async(req,res)=>{
     try{
         var{IDUzytkownik, IDFilm}=req.body;
