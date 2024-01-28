@@ -1,21 +1,44 @@
-import React, { useState } from 'react';
 import axios from 'axios';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import requests from "../requests";
 import MovieDetails from './MovieDetails'; // Import MovieDetails
 import '../css/NavBar.css'; // Assuming you have a CSS file for styling
+import { Button, Container, Form, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../css/navbar.css';
+
+
 
 const NavigationBar = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
+  const navigate = useNavigate();
 
+    const handleLogout = () => {
+        localStorage.removeItem('userId');
+        setUserInfo(null);
+        navigate('/login');
+    };
+    useEffect(() => {
+        const id = localStorage.getItem('userId');
+        console.log("Fetched user ID:", id);
+        if (id) {
+            fetchUserInfo(id);
+        }
+    }, []);
+    const fetchUserInfo = async (id) => {
+        try {
+            const response = await axios.get(`http://localhost:3001/uzytkownicy/${id}`);
+            setUserInfo(response.data);
+
+            console.log("Fetched user info:", response.data);
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+        }
+    };
   const onSearch = (event) => {
     event.preventDefault(); // Prevent default form submission behavior
     if (searchTerm.trim() === '') {
@@ -64,7 +87,7 @@ const NavigationBar = () => {
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
               <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>
-                <Nav.Link href="#action1">Home</Nav.Link>
+                <Nav.Link href="#action1">Link</Nav.Link>
                 <Nav.Link href="#action2">Link</Nav.Link>
                 <NavDropdown title="Link" id="navbarScrollingDropdown">
                   <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
@@ -74,6 +97,9 @@ const NavigationBar = () => {
                 </NavDropdown>
               </Nav>
               <Form className="d-flex" onSubmit={onSearch}>
+                  {userInfo && (
+                      <Nav.Link className="navbar-username" href="/profile">Hello, {userInfo.Username}</Nav.Link>
+                  )}
                 <Form.Control
                     type="search"
                     placeholder="Search"
@@ -83,6 +109,15 @@ const NavigationBar = () => {
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
                 <Button variant="outline-success" type="submit">Search</Button>
+                  {!userInfo && (
+                      <>
+                          <Button variant="outline-secondary" className="login-button ms-2" onClick={() => navigate('/login')}>Login</Button>
+                          <Button variant="outline-info" className="signup-button ms-2" onClick={() => navigate('/signup')}>Sign Up</Button>
+                      </>
+                  )}
+                  {userInfo && (
+                      <Button variant="outline-danger" onClick={handleLogout} className="ms-2">Logout</Button>
+                  )}
               </Form>
             </Navbar.Collapse>
           </Container>

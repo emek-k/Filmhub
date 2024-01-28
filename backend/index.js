@@ -5,9 +5,16 @@ const bodyParser=require("body-parser");
 const app=express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}))
+
+const cors = require('cors');
+app.use(cors());
+
 app.listen(3001,()=>{
     console.log("Start");
 });
+
+
+
 const db=mysql.createConnection({
     host:'127.0.0.1',
     port:'3306',
@@ -98,38 +105,46 @@ app.get('/uzytkownicy',async(req,res)=>{
     const results=await queryPromise(SQL);
     res.status(500).json(results);
 })
-app.get('/uzytkownicy/:id', async(req,res)=>{
-    try{
-        const{id}=req.params;
-        var SQL = 'SELECT * FROM uzytkownicy WHERE Id=?';
-        const results=await queryPromise(SQL,[id]);
-        if(results.length===0){
-            res.status(404).json({error: 'Nie ma takiego użytkownika'});
-        }else{
-            res.status(500).json(results[0]);
-        }
+app.get('/uzytkownicy/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const SQL = 'SELECT * FROM uzytkownicy WHERE Id = ?';
+    const result = await queryPromise(SQL, [id]);
+
+    if (result.length === 0) {
+      return res.status(404).json({ error: 'User not found' });
     }
-    catch{
-        console.log(err);
-        res.status(500).json({error:'Nie znaleziono prawidłowego użytkownika'});
+
+    res.json(result[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'server error' });
+  }
+});
+app.get('/ulubione/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    var SQL = 'SELECT IDFilm FROM ulubione WHERE IDUzytkownik = ?';
+    const results = await queryPromise(SQL, [id]);
+
+    if (results.length === 0) {
+      return res.status(404).json({ error: 'No favorite movies found for this user' });
     }
-})
-app.get('/ulubione/:id', async(req,res)=>{
-    try{
-        const{id}=req.params;
-        var SQL = 'SELECT IDFilm FROM ulubione WHERE IDUżytkownik=?';
-        const results=await queryPromise(SQL,[id]);
-        if(results.length===0){
-            res.status(404).json({error: 'Nie ma takiego użytkownika'});
-        }else{
-            res.status(500).json(results);
-        }
-    }
-    catch{
-        console.log(err);
-        res.status(500).json({error:'Nie znaleziono prawidłowego użytkownika'});
-    }
-})
+
+    const movieDetailsPromises = results.map(film =>
+      axios.get(`${TMDB_BASE_URL}/movie/${film.IDFilm}?api_key=${API_KEY}`)
+    );
+
+    const movieDetailsResponses = await Promise.all(movieDetailsPromises);
+    const movies = movieDetailsResponses.map(response => response.data);
+
+    res.json(movies);
+  } catch (err) {
+    console.error('Error:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 app.get('/obejrzane/:id', async(req,res)=>{
     try{
         const{id}=req.params;
@@ -215,7 +230,7 @@ app.delete('/ulubione/:id',async(req,res)=>{
     try{
         const id=req.params.id;
         const {IDFilm}=req.body;
-        const SQL='DELETE FROM ulubione WHERE IDUżytkownik=? AND IDFilm=?';
+        const SQL='DELETE FROM ulubione WHERE IDUzytkownik=? AND IDFilm=?';
         const result=await queryPromise(SQL,[id,IDFilm]);
         if(result.affectedRows===0){
             res.status(404).json({error:"Nie ma takiego użytkownika lub filmu"});
@@ -228,7 +243,7 @@ app.delete('/ulubione/:id',async(req,res)=>{
         res.status(500).json({error:"Nie można usunąć wpisu"})
     }
 })
-app.delete('/ulubione/:id',async(req,res)=>{
+app.delete('/obejrzane/:id',async(req,res)=>{
     try{
         const id=req.params.id;
         const {IDFilm}=req.body;
@@ -262,3 +277,39 @@ app.delete('/kolejka/:id',async(req,res)=>{
         res.status(500).json({error:"Nie można usunąć wpisu"})
     }
 })
+
+app.post('/login', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    if (!username || !password) {
+      return res.status(400).json({ error: "Username and password are required." });
+    }
+
+    const SQL = "SELECT * FROM uzytkownicy WHERE BINARY Username = ? AND Haslo = ?";
+    const users = await queryPromise(SQL, [username, password]);
+
+    if (users.length === 0) {
+      return res.status(401).json({ error: "Invalid credentials." });
+    }
+
+    res.json({ message: "Login successful", user: users[0] });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+const axios = require('axios');
+
+const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
+
+const API_KEY = 'ac0accae8ecc4e6cba7c3a1110a8bb30';
+app.get('/movies/popular', async (req, res) => {
+  try {
+    const response = await axios.get(`${TMDB_BASE_URL}/movie/popular?api_key=${API_KEY}`);
+    res.json(response.data.results);
+  } catch (error) {
+    console.error('Error fetching data from TMDB:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
