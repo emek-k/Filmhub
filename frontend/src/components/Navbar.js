@@ -1,11 +1,11 @@
 import axios from 'axios';
 import requests from "../requests";
 import MovieDetails from './MovieDetails'; // Import MovieDetails
-import '../css/NavBar.css'; // Assuming you have a CSS file for styling
+import '../css/Navbar.css'; // Assuming you have a CSS file for styling
 import { Button, Container, Form, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../css/navbar.css';
+import '../css/Navbar.css';
 
 
 
