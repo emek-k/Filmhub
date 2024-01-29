@@ -205,14 +205,14 @@ app.get('/uzytkownicy/szukaj', async(req,res)=>{
 app.put('/uzytkownicy/:id',async(req,res)=>{
     try{
         const id=req.params.id;
-        const{username, haslo, email}=req.body;
-        const SQL="UPDATE uzytkownicy SET Username = ? , Hasło = ?, Email=? WHERE Id=?";
-        const result=await queryPromise(SQL,[username,haslo,email,id])
+        const{username, email}=req.body;
+        const SQL="UPDATE uzytkownicy SET Username = ? , Email=? WHERE Id=?";
+        const result=await queryPromise(SQL,[username,email,id])
         if(result.affectedRows===0){
             res.send(404).json({error:"Nie ma takiego użytkownika"})
         }
         else{
-            res.status(200).json({id:id,username,haslo,email});
+            res.status(200).json({id:id,username,email});
         }
     }catch(err){
         res.status(500).json({error:"Nie znaleziono prawidłowego użytkownika"})

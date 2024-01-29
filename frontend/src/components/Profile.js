@@ -1,11 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../css/profile.css';
-import {Button} from "react-bootstrap";
+import {Button, FloatingLabel, Form} from "react-bootstrap";
 
 const Profile = ({ userInfo }) => {
   const [movies, setMovies] = useState([]);
   const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
+  const [updateData, setUpdateData] = useState({
+    username: userInfo?.Username || '',
+    email: userInfo?.Email || ''
+  });
+  const [editMode, setEditMode] = useState(false);
+
+  useEffect(() => {
+    if (userInfo) {
+      setUpdateData({
+        username: userInfo.Username,
+        email: userInfo.Email
+      });
+    }
+  }, [userInfo]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUpdateData({ ...updateData, [name]: value });
+  };
+
 
   const fetchFavoriteMovies = async () => {
     if (userInfo && userInfo.Id) {
@@ -17,6 +37,20 @@ const Profile = ({ userInfo }) => {
       }
     }
   };
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    try {
+      console.log("Updating user data:", updateData);
+      const response = await axios.put(`http://localhost:3001/uzytkownicy/${userInfo.Id}`, updateData);
+      console.log(response.data);
+      setEditMode(false);
+      window.location.reload();
+    } catch (error) {
+      console.error('Error updating user data:', error);
+    }
+  };
+
 
   useEffect(() => {
     fetchFavoriteMovies();
@@ -47,10 +81,37 @@ const Profile = ({ userInfo }) => {
     <div className="container">
       <div className="profile-container">
         <h1>Profile Page</h1>
-        {userInfo && (
+        {editMode ? (
+          <Form onSubmit={handleUpdate}>
+            <h2>Update Profile</h2>
+            <Form.Group className="mb-3">
+              <FloatingLabel label="Username" className="mb-3">
+                <Form.Control
+                  type="text"
+                  name="username"
+                  value={updateData.username}
+                  onChange={handleInputChange}
+                />
+              </FloatingLabel>
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <FloatingLabel label="Email" className="mb-3">
+                <Form.Control
+                  type="email"
+                  name="email"
+                  value={updateData.email}
+                  onChange={handleInputChange}
+                />
+              </FloatingLabel>
+            </Form.Group>
+            <Button variant="primary" type="submit">Save</Button>
+            <Button variant="secondary" onClick={() => setEditMode(false)} className="ms-2">Cancel</Button>
+          </Form>
+        ) : (
           <div>
-            <p><strong>Username:</strong> {userInfo.Username}</p>
-            <p><strong>Email:</strong> {userInfo.Email}</p>
+            <p><strong>Username:</strong> {userInfo?.Username}</p>
+            <p><strong>Email:</strong> {userInfo?.Email}</p>
+            <Button variant="secondary" onClick={() => setEditMode(true)}>Edit Data</Button>
           </div>
         )}
 
