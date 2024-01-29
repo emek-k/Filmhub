@@ -78,11 +78,11 @@ const Profile = ({ userInfo }) => {
   };
 
   return (
-    <div className="container">
       <div className="profile-container">
         <h1>Profile Page</h1>
+        <div className={editMode ? "form-container" : ""}>
         {editMode ? (
-          <Form onSubmit={handleUpdate}>
+          <Form className="profile-form" onSubmit={handleUpdate}>
             <h2>Update Profile</h2>
             <Form.Group className="mb-3">
               <FloatingLabel label="Username" className="mb-3">
@@ -114,6 +114,7 @@ const Profile = ({ userInfo }) => {
             <Button variant="secondary" onClick={() => setEditMode(true)}>Edit Data</Button>
           </div>
         )}
+        </div>
 
         <h2>Your Favorite Movies</h2>
         {currentMovie && (
@@ -128,7 +129,6 @@ const Profile = ({ userInfo }) => {
           </div>
         )}
       </div>
-    </div>
   );
 };
 

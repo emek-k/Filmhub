@@ -7,7 +7,7 @@ const Home = () => {
 
     const handleCategoryChange = (category) => {
         setSelectedCategory(category);
-        setReloadKey(prevKey => prevKey + 1); // Increment key to force re-render of Movie component
+        setReloadKey(prevKey => prevKey + 1);
     };
 
     return (

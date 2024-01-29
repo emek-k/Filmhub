@@ -1,5 +1,15 @@
-.profile-container{
-  margin-top: 200px;
+.profile-container {
+  margin-top: 2vh;
   text-align: center;
   color: whitesmoke;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-form {
+  width: 50vh;
 }

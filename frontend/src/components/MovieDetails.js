@@ -1,12 +1,12 @@
 import '../css/MovieDetails.css';
 import { useState } from "react";
-import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const MovieDetails = ({ isOpen, onClose, movie }) => {
     const [favorites, setFavorites] = useState([]);
     const [alertMessage, setAlertMessage] = useState('');
     const [showAlert, setShowAlert] = useState(false);
-    const [isAddition, setIsAddition] = useState(true); // New state to track the type of action
+    const [isAddition, setIsAddition] = useState(true);
     const isFavorite = favorites.some(favMovie => favMovie.id === movie?.id);
 
     if (!isOpen) return null;
@@ -22,7 +22,7 @@ const MovieDetails = ({ isOpen, onClose, movie }) => {
             setIsAddition(true);
         }
         setShowAlert(true);
-        setTimeout(() => setShowAlert(false), 3000); // Hide alert after 3 seconds
+        setTimeout(() => setShowAlert(false), 3000);
     };
 
     return (
