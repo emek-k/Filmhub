@@ -71,7 +71,8 @@ const Profile = ({ userInfo }) => {
     try {
       console.log(`Attempting to remove movie ID: ${movieId} for user ID: ${userInfo.Id}`);
       await axios.delete(`http://localhost:3001/ulubione/${userInfo.Id}`, { data: { IDFilm: movieId } });
-      fetchFavoriteMovies();
+      window.location.reload();
+      await fetchFavoriteMovies();
     } catch (error) {
       console.error('Error removing movie from favorites:', error);
     }

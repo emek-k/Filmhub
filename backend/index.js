@@ -66,20 +66,24 @@ app.post('/uzytkownicy', async (req, res) => {
 });
 
 
-app.post('/ulubione', async(req,res)=>{
-    try{
-        var{IDUzytkownik, IDFilm}=req.body;
-        if(!IDUzytkownik || !IDFilm){
-            throw new Error("Wszystkie pola muszą być wypełnione.");
-        }
-        const para=[IDUzytkownik, IDFilm];
-        const SQL="INSERT INTO ulubione (IDUżytkownik, IDFilm) VALUES (?,?)";
-        const result=await queryPromise(SQL,para)
-        res.json({IDUzytkownik, IDFilm});
-    }catch(err){
-        console.log(err);
+app.post('/ulubione/:id', async(req, res) => {
+  try {
+    const { id } = req.params;
+    const { IDFilm } = req.body;
+
+    if (!id || !IDFilm) {
+      return res.status(400).json({ error: "All fields must be filled." });
     }
-})
+
+    const SQL = "INSERT INTO ulubione (IDUzytkownik, IDFilm) VALUES (?, ?)";
+    await queryPromise(SQL, [id, IDFilm]);
+
+    res.status(201).json({ message: "Movie added to favorites successfully" });
+  } catch (err) {
+    console.error('Error:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 app.post('/obejrzane', async(req,res)=>{
     try{
         var{IDUzytkownik, IDFilm}=req.body;
