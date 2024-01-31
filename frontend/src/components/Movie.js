@@ -36,11 +36,11 @@ const Movie = ({ selectedCategory }) => {
             } else {
                 setMovies(prevMovies => [...prevMovies, ...(newMovies || [])]);
             }
-            if (!newMovies || newMovies.length < 20) { // assuming 20 is the max per page
+            if (!newMovies || newMovies.length < 20) {
                 setHasMore(false);
             }
         });
-    }, [selectedCategory, page]); // Dependency array includes both selectedCategory and page
+    }, [selectedCategory, page]);
 
     const fetchMoreMovies = () => {
         setPage(prevPage => prevPage + 1);

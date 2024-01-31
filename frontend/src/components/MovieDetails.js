@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
 import UserInfoContext from "./UserInfoContext";
 
-const MovieDetails = ({ isOpen, onClose, movie, userId }) => {
+const MovieDetails = ({ isOpen, onClose, movie}) => {
   const userInfo = useContext(UserInfoContext);
 
   const [favorites, setFavorites] = useState([]);
@@ -17,6 +17,10 @@ const MovieDetails = ({ isOpen, onClose, movie, userId }) => {
 
   const handleFavoritesToggle = async () => {
     try {
+      if (!userInfo) {
+        setAlertMessage("You need to be logged in to add to favorites");
+        setShowAlert(true);
+      }
       if (isFavorite) {
         await axios.delete(`http://localhost:3001/ulubione/${userInfo.Id}`, { data: { IDFilm: movie.id } });
         setFavorites(favorites.filter(favMovie => favMovie.id !== movie.id));

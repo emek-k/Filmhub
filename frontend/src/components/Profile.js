@@ -40,15 +40,11 @@ const Profile = ({ userInfo }) => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    try {
       console.log("Updating user data:", updateData);
       const response = await axios.put(`http://localhost:3001/uzytkownicy/${userInfo.Id}`, updateData);
       console.log(response.data);
       setEditMode(false);
       window.location.reload();
-    } catch (error) {
-      console.error('Error updating user data:', error);
-    }
   };
 
 
