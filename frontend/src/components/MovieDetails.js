@@ -62,6 +62,9 @@ const MovieDetails = ({ isOpen, onClose, movie }) => {
   };
   const handleFavoritesToggle = async () => {
     try {
+      if (!userInfo){
+        notLoggedInButtons();
+      }
       if (isFavorite) {
         await axios.delete(`http://localhost:3001/ulubione/${userInfo.Id}`, { data: { IDFilm: movie.id } });
         setFavorites(favorites.filter(favMovie => favMovie.id !== movie.id));
