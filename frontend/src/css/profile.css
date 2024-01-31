@@ -2,6 +2,7 @@
   margin-top: 2vh;
   text-align: center;
   color: whitesmoke;
+  height: 90vh;
 }
 
 .form-container {
@@ -12,4 +13,9 @@
 
 .profile-form {
   width: 50vh;
+}
+
+.movie-feature button{
+  width: 20%;
+  height: 5vh;
 }

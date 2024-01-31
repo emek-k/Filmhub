@@ -85,21 +85,14 @@ const NavigationBar = () => {
               <span className="display-4 fw-bold">FILMHUB</span>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="navbarScroll" />
-            <Navbar.Collapse id="navbarScroll">
+            <Navbar.Collapse id="navbarScroll text0szi" className={"display-6"}>
               <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>
-                <Nav.Link href="#action1">Link</Nav.Link>
-                <Nav.Link href="#action2">Link</Nav.Link>
-                <NavDropdown title="Link" id="navbarScrollingDropdown">
-                  <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                  <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action5">Something else here</NavDropdown.Item>
-                </NavDropdown>
+                <Nav.Link href="/profile">Profile</Nav.Link>
               </Nav>
               <Form className="d-flex" onSubmit={onSearch}>
-                  {userInfo && (
-                      <Nav.Link className="navbar-username" href="/profile">Hello, {userInfo.Username}</Nav.Link>
-                  )}
+                  {/*{userInfo && (*/}
+                  {/*    <Nav.Link className="navbar-username" href="/profile">Hello, {userInfo.Username}</Nav.Link>*/}
+                  {/*)}*/}
                 <Form.Control
                     type="search"
                     placeholder="Search"

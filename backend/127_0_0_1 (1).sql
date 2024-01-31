@@ -67,8 +67,6 @@ CREATE TABLE IF NOT EXISTS `ulubione` (
 --
 
 INSERT INTO `ulubione` (`IDUzytkownik`, `IDFilm`) VALUES
-(1, 1),
-(1, 3),
 (1, 872585),
 (2, 753342),
 (3, 753342),

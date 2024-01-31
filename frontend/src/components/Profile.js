@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import axios from 'axios';
 import '../css/profile.css';
 import {Button, FloatingLabel, Form} from "react-bootstrap";
+import UserInfoContext from "./UserInfoContext";
+import { useNavigate } from 'react-router-dom';
 
 const Profile = ({ userInfo }) => {
+  const navigate = useNavigate();
   const [movies, setMovies] = useState([]);
   const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
   const [updateData, setUpdateData] = useState({
@@ -11,6 +14,7 @@ const Profile = ({ userInfo }) => {
     email: userInfo?.Email || ''
   });
   const [editMode, setEditMode] = useState(false);
+  const isLoggedIn = useContext(UserInfoContext);
 
   useEffect(() => {
     if (userInfo) {
@@ -78,6 +82,17 @@ const Profile = ({ userInfo }) => {
     }
   };
 
+  if(!isLoggedIn){
+    return (
+        <div className="profile-container">
+          <h1>LOG IN TO SEE THIS PAGE!</h1>
+          <Button variant="outline-secondary" className="login-button ms-2" onClick={() => navigate('/login')}>Login</Button>
+          <Button variant="outline-info" className="signup-button ms-2" onClick={() => navigate('/signup')}>Sign Up</Button>
+        </div>
+    )
+  }
+
+
   return (
       <div className="profile-container">
         <h1>Profile Page</h1>
@@ -123,9 +138,9 @@ const Profile = ({ userInfo }) => {
             <div>
               <img src={`https://image.tmdb.org/t/p/w500${currentMovie.poster_path}`} alt={currentMovie.title} />
               <h3>{currentMovie.title}</h3>
-              <Button variant="outline-danger" onClick={handlePrevious}>&lt;</Button>
-              <Button variant="outline-danger ms-5" onClick={() => removeFromFavorites(currentMovie.id)}>Remove from favourite</Button>
-              <Button variant="outline-danger ms-5" onClick={handleNext}>&gt;</Button>
+              <Button variant="outline-secondary" onClick={handlePrevious}>&lt;</Button>
+              <Button variant="outline-danger m-3" onClick={() => removeFromFavorites(currentMovie.id)}>Remove from favourite</Button>
+              <Button variant="outline-secondary" onClick={handleNext}>&gt;</Button>
             </div>
           </div>
         )}
