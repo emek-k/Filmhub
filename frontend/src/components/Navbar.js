@@ -104,7 +104,7 @@ const NavigationBar = () => {
                 <Button variant="outline-success" type="submit">Search</Button>
                   {!userInfo && (
                       <>
-                          <Button variant="outline-secondary" className="login-button ms-2" onClick={() => navigate('/login')}>Login</Button>
+                          <Button variant="outline-secondary" className="login-button ms-2" onClick={() => navigate('/login')}>Log in</Button>
                           <Button variant="outline-info" className="signup-button ms-2" onClick={() => navigate('/signup')}>Sign Up</Button>
                       </>
                   )}

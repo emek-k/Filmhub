@@ -1,8 +1,7 @@
 .profile-container {
-  margin-top: 2vh;
   text-align: center;
   color: whitesmoke;
-  height: 90vh;
+  height: 150vh;
 }
 
 .form-container {
@@ -10,7 +9,10 @@
   justify-content: center;
   align-items: center;
 }
-
+.user-info{
+  font-size: 20px;
+  padding-bottom: 20px;
+}
 .profile-form {
   width: 50vh;
 }
@@ -18,4 +20,16 @@
 .movie-feature button{
   width: 20%;
   height: 5vh;
+}
+
+.movie-carousel button {
+  border: none;
+  background: transparent;
+  font-size: 300px;
+  color: #333;
+}
+
+.movie-carousel button:hover {
+  background: transparent;
+  color: #666;
 }

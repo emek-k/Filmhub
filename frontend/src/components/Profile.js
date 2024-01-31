@@ -95,7 +95,8 @@ const Profile = ({ userInfo }) => {
 
   return (
       <div className="profile-container">
-        <h1>Profile Page</h1>
+        <h1 className="my-5">Profile Page</h1>
+        <p className="user-info"><strong>User information</strong></p>
         <div className={editMode ? "form-container" : ""}>
         {editMode ? (
           <Form className="profile-form" onSubmit={handleUpdate}>
@@ -132,16 +133,16 @@ const Profile = ({ userInfo }) => {
         )}
         </div>
 
-        <h2>Your Favorite Movies</h2>
+        <h2 className="my-5">Your Favorite Movies</h2>
         {currentMovie && (
           <div className="movie-feature">
-            <div>
+            <div className="movie-carousel">
+              <Button variant="outline-danger" onClick={handlePrevious}>&lt;</Button>
               <img src={`https://image.tmdb.org/t/p/w500${currentMovie.poster_path}`} alt={currentMovie.title} />
-              <h3>{currentMovie.title}</h3>
-              <Button variant="outline-secondary" onClick={handlePrevious}>&lt;</Button>
-              <Button variant="outline-danger m-3" onClick={() => removeFromFavorites(currentMovie.id)}>Remove from favourite</Button>
-              <Button variant="outline-secondary" onClick={handleNext}>&gt;</Button>
+              <Button variant="outline-danger" onClick={handleNext}>&gt;</Button>
             </div>
+            <h3>{currentMovie.title}</h3>
+            <Button className="mt-3" variant="outline-danger" onClick={() => removeFromFavorites(currentMovie.id)}>Remove from favourite</Button>
           </div>
         )}
       </div>
