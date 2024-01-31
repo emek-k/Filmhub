@@ -37,3 +37,18 @@
     right: 20px;
     z-index: 1050;
 }
+
+.scrollable-modal-content {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.movie-comments {
+}
+
+.comment-border {
+  background-color: #e9ebe9;
+  word-wrap: break-word;
+  white-space: normal;
+}
+

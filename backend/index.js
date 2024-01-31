@@ -326,3 +326,27 @@ app.get('/movies/popular', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+app.get('/komentarze/:IDFilm', async (req, res) => {
+  const { IDFilm } = req.params;
+  try {
+    const SQL = 'SELECT komentarze.*, uzytkownicy.Username FROM komentarze JOIN uzytkownicy ON komentarze.IDUzytkownik = uzytkownicy.Id WHERE IDFilm = ?';
+    const results = await queryPromise(SQL, [IDFilm]);
+    res.json(results);
+  } catch (err) {
+    console.error('Error fetching comments:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+app.post('/komentarze', async (req, res) => {
+  const { IDUzytkownik, IDFilm, Komentarz } = req.body;
+  try {
+    const SQL = 'INSERT INTO komentarze (IDUzytkownik, IDFilm, Komentarz) VALUES (?, ?, ?)';
+    await queryPromise(SQL, [IDUzytkownik, IDFilm, Komentarz]);
+    res.status(201).json({ message: 'Comment added successfully' });
+  } catch (err) {
+    console.error('Error adding comment:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
