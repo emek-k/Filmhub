@@ -1,3 +1,16 @@
+.d-flex{
+  white-space: nowrap;
+}
+.navbar-username {
+  text-align: center;
+  padding-top: 6px;
+  padding-right: 10px;
+  color: whitesmoke;
+}
+
+.login-button {
+}
+
 .search-results-container {
     position: absolute;
     top: 8%;

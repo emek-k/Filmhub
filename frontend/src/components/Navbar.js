@@ -1,7 +1,7 @@
 import axios from 'axios';
 import requests from "../requests";
-import MovieDetails from './MovieDetails'; // Import MovieDetails
-import '../css/Navbar.css'; // Assuming you have a CSS file for styling
+import MovieDetails from './MovieDetails';
+import '../css/Navbar.css';
 import { Button, Container, Form, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -40,7 +40,7 @@ const NavigationBar = () => {
         }
     };
   const onSearch = (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
+    event.preventDefault();
     if (searchTerm.trim() === '') {
       setSearchResults([]);
       return;
@@ -59,7 +59,7 @@ const NavigationBar = () => {
   const handleMovieSelect = (movie) => {
     setSelectedMovie(movie);
     setIsModalOpen(true);
-    setSearchResults([]); // Clear search results after selection
+    setSearchResults([]);
   };
 
   const handleCloseModal = () => {
@@ -74,7 +74,7 @@ const NavigationBar = () => {
       <>
         <Navbar expand="lg" className="bg-body-tertiary" bg="dark" data-bs-theme="dark">
           <Container fluid>
-            <Navbar.Brand href="#">
+            <Navbar.Brand href="/">
               <img
                   src="/filmhub-logo-white.png"
                   width="80"

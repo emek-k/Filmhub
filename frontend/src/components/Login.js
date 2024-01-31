@@ -30,7 +30,7 @@ const Login = () => {
   return (
     <div className="container">
       <Form className="form-login" onSubmit={handleSubmit}>
-        <h1 className="text-center mb-5">Login here</h1>
+        <h1 className="header text-center mb-5">Login here</h1>
         {errorMessage && <div className="alert alert-danger" role="alert">{errorMessage}</div>}
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -45,7 +45,7 @@ const Login = () => {
           </FloatingLabel>
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
+        <Form.Group className="checkbox mb-3" controlId="formBasicCheckbox">
           <Form.Check type="checkbox" label="Remember me" />
         </Form.Group>
 
