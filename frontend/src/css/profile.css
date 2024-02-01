@@ -1,9 +1,8 @@
 .profile-container {
   text-align: center;
   color: whitesmoke;
-  height: 150vh;
+  height: 110vh;
 }
-
 .form-container {
   display: flex;
   justify-content: center;
@@ -17,16 +16,22 @@
   width: 50vh;
 }
 
-.movie-feature button{
+.movie-carousel button{
   width: 20%;
-  height: 5vh;
+  height: 60vh;
+  border: none;
+  background: transparent;
+  font-size: 10rem;
+  padding: 0;
+  color: #515151;
 }
 
 .movie-carousel button {
-  border: none;
-  background: transparent;
-  font-size: 300px;
-  color: #333;
+  text-align: center;
+}
+
+.movie-carousel button:active{
+  background: transparent !important;
 }
 
 .movie-carousel button:hover {

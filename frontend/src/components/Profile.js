@@ -137,9 +137,9 @@ const Profile = ({ userInfo }) => {
         {currentMovie && (
           <div className="movie-feature">
             <div className="movie-carousel">
-              <Button variant="outline-danger" onClick={handlePrevious}>&lt;</Button>
+              <Button variant="outline-secondary" onClick={handlePrevious}>&lt;</Button>
               <img src={`https://image.tmdb.org/t/p/w500${currentMovie.poster_path}`} alt={currentMovie.title} />
-              <Button variant="outline-danger" onClick={handleNext}>&gt;</Button>
+              <Button variant="outline-secondary" onClick={handleNext}>&gt;</Button>
             </div>
             <h3>{currentMovie.title}</h3>
             <Button className="mt-3" variant="outline-danger" onClick={() => removeFromFavorites(currentMovie.id)}>Remove from favourite</Button>

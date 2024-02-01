@@ -2,7 +2,7 @@ import axios from 'axios';
 import requests from "../requests";
 import MovieDetails from './MovieDetails';
 import '../css/Navbar.css';
-import { Button, Container, Form, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { Button, Container, Form, Nav, Navbar } from 'react-bootstrap';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../css/Navbar.css';
