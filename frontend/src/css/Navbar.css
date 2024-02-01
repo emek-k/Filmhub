@@ -1,11 +1,11 @@
 .d-flex{
-  white-space: nowrap;
+    white-space: nowrap;
 }
 .navbar-username {
-  text-align: center;
-  padding-top: 6px;
-  padding-right: 10px;
-  color: whitesmoke;
+    text-align: center;
+    padding-top: 6px;
+    padding-right: 10px;
+    color: whitesmoke;
 }
 
 .login-button {
