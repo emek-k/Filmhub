@@ -15,4 +15,6 @@ Jest to nasza interpretacja popularnego serwisu do oceniania fimów - FilmWeb. O
 * NODE JS 
 
 # PREZENTACJA APLIKACJI
-DEMO - https://youtu.be/8k5zfJVQMeg
+DEMO - 
+[![Video Title](<img width="1262" alt="Screenshot 2024-06-16 at 23 44 40" src="https://github.com/emek-k/Js-Filmweb/assets/48961771/1c434081-9e55-4520-85bd-5fd0583d7942">)](https://youtu.be/8k5zfJVQMeg)
+
