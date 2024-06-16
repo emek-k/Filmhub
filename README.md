@@ -15,4 +15,4 @@ Jest to nasza interpretacja popularnego serwisu do oceniania fimów - FilmWeb. O
 * NODE JS 
 
 # PREZENTACJA APLIKACJI
-DEMO - https://youtu.be/5JY8QRk-BNs
+DEMO - https://youtu.be/8k5zfJVQMeg
