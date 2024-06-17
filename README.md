@@ -1,24 +1,47 @@
-# FILMHUB
-Jest to nasza interpretacja popularnego serwisu do oceniania fimów - FilmWeb. Obecna aplikacja filmwebu jest złożona, mało interaktywna i dość nudna. W małym 3 osobowym zespole postanowiliśmy to zmienić. Za pomocą dostępu do API TMDB udało nam się napisać lepszą wersję popularnego serwisu.
-
-# TECH STACK 
-### FRONTEND 
-* REACT
-* BOOTSTRAP
-### BACKEND 
-* NODE JS 
-
-# PREZENTACJA APLIKACJI
-DEMO - https://youtu.be/8k5zfJVQMeg
-
-<a href="https://youtu.be/8k5zfJVQMeg" target="_blank">
-  <img width="500" alt="Screenshot 2024-06-16 at 23 44 40" src="https://github.com/emek-k/Js-Filmweb/assets/48961771/2ab9724e-df1d-4c50-9b7f-c792b7ebc59e">
-</a>
-
-Wykorzystywane API:
-TMDB - https://developer.themoviedb.org/docs/getting-started 
 <table border="0">
- <tr>
+  <tr>
+    <td colspan="6">
+        <h1>FILMHUB</h1>
+      <p>Jest to nasza interpretacja popularnego serwisu do oceniania fimów - FilmWeb. Obecna aplikacja filmwebu jest złożona, mało interaktywna i dość nudna. W małym 3 osobowym zespole postanowiliśmy to zmienić. Za pomocą dostępu do API TMDB udało nam się napisać lepszą wersję popularnego serwisu.</p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <h4>Frontend</h4>
+    </td>
+    <td colspan="3">
+        <h4>Backend</h4>
+    </td>
+  </tr>
+   <tr>
+    <td colspan="3">
+        <ul>
+          <li>React</li>
+          <li>Bootstrap</li>
+        </ul>
+    </td>
+    <td colspan="3">
+        <ul>
+          <li>Node Js</li>
+        </ul>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="6" align="center">
+      <h2>Prezentacja aplikacji</h2>
+      <a href="https://youtu.be/8k5zfJVQMeg" target="_blank">
+        <img width="500" src="https://github.com/emek-k/Js-Filmweb/assets/48961771/2ab9724e-df1d-4c50-9b7f-c792b7ebc59e">
+      </a>
+      <p>DEMO - https://youtu.be/8k5zfJVQMeg</p>
+    </td>
+  <tr>
+    <td colspan="6">
+      Wykorzystaliśmy TMDB - https://developer.themoviedb.org/docs/getting-started 
+    </td>
+  </tr>
+</table>
+<table border="0">
+  <tr>
     <td colspan="6" align="left">
       <h1>Your next developer might be just a click away!</h1>
       <h3>
@@ -60,4 +83,5 @@ TMDB - https://developer.themoviedb.org/docs/getting-started
       </a>
     </td>
   </tr>
+</table>
 </table>
