@@ -19,6 +19,16 @@ Wykorzystywane API:
 TMDB - https://developer.themoviedb.org/docs/getting-started 
 <table border="0">
  <tr>
+    <td colspan="6" align="left">
+      <h1>Your next developer might be just a click away!</h1>
+      <h3>
+        Explore my projects and see how my teamwork mindset and relentless work
+        ethic can help us achieve amazing things together! Don't hesitate to
+        connect and discuss our next venture. Let's build something incredible!
+      </h3>
+    </td>
+  </tr>
+  <tr>
     <td rowspan="3" colspan="4" align="center">
       <img
         src="https://i.pinimg.com/originals/79/9e/0d/799e0d7779f6ea6c3a89885ff60c55af.gif"
