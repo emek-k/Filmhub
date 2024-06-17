@@ -12,7 +12,7 @@ Jest to nasza interpretacja popularnego serwisu do oceniania fimów - FilmWeb. O
 DEMO - https://youtu.be/8k5zfJVQMeg
 
 <a href="https://youtu.be/8k5zfJVQMeg" target="_blank">
-  <img width="1262" alt="Screenshot 2024-06-16 at 23 44 40" src="https://github.com/emek-k/Js-Filmweb/assets/48961771/2ab9724e-df1d-4c50-9b7f-c792b7ebc59e">
+  <img width="500" alt="Screenshot 2024-06-16 at 23 44 40" src="https://github.com/emek-k/Js-Filmweb/assets/48961771/2ab9724e-df1d-4c50-9b7f-c792b7ebc59e">
 </a>
 
 Wykorzystywane API:
